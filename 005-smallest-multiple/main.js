@@ -8,8 +8,18 @@ Problem 5
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 */
 
-function factorial(value) {
-    let result = 1
-    for (let i = 1; i <= value; i++) result *= i
-    return result
+let value
+
+while (!isDivisible(value)) {
+    if (value) value++
+    else value = 1
+}
+
+console.log(value)
+
+function isDivisible(value) {
+    for (let i = 1; i <= 20; i++) {
+        if (value % i !== 0) return false
+    }
+    return true
 }
