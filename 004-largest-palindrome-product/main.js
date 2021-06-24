@@ -8,25 +8,25 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
-let largestProduct = 0
+let largestProduct = 0,
+    a = 999
 
-for (let i = 1; i < 1000; i++) {
-    for (let j = 1; j < 1000; j++) {
-        if (i === j) continue
-        const product = i * j
-        if (!isPalindrome(product)) continue
-        if (product > largestProduct) largestProduct = product
+while (a >= 100) {
+    let b = a % 11 === 0 ? 999 : 990
+    const db = a % 11 === 0 ? 1 : 11
+
+    while (b >= a) {
+        const product = a * b
+        if (product <= largestProduct) break
+        if (isPalindrome(product)) largestProduct = product
+        b -= db
     }
+
+    a -= 1
 }
 
 console.log(largestProduct)
 
-function isPalindrome(value) {
-    const s = String(value)
-    const firstHalf = s.slice(0, s.length / 2),
-        secondHalf =
-            s.length % 2 === 0
-                ? s.slice(s.length / 2)
-                : s.slice(s.length / 2 + 1)
-    return firstHalf === secondHalf.split("").reverse().join("")
+function isPalindrome(n) {
+    return n === +String(n).split("").reverse().join("")
 }
